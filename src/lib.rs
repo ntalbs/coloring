@@ -157,6 +157,7 @@ pub trait Style {
     fn dimmed(&self) -> Colored;
     fn italic(&self) -> Colored;
     fn underline(&self) -> Colored;
+    fn strike(&self) -> Colored;
 }
 
 impl Style for Colored {
@@ -178,6 +179,11 @@ impl Style for Colored {
     fn underline(&self) -> Colored {
         Colored {
             text: format!("\x1b[4m{}\x1b[0m", self.text)
+        }
+    }
+    fn strike(&self) -> Colored {
+        Colored {
+            text: format!("\x1b[9m{}\x1b[0m", self.text)
         }
     }
 }
@@ -264,6 +270,10 @@ impl Style for &str {
     fn underline(&self) -> Colored {
         Colored::from(self).underline()
     }
+
+    fn strike(&self) -> Colored {
+        Colored::from(self).strike()
+    }
 }
 
 impl Color for String {
@@ -348,6 +358,10 @@ impl Style for String {
     fn underline(&self) -> Colored {
         Colored::from(self).underline()
     }
+
+    fn strike(&self) -> Colored {
+        Colored::from(self).strike()
+    }
 }
 
 #[test]
@@ -359,4 +373,5 @@ fn test() {
     println!("{}", "magenta_underline".magenta().underline());
     println!("{}", "italic_red".italic().red());
     println!("{}", "underline_blue".underline().blue());
+    println!("{}", "strike".strike().blue());
 }
