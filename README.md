@@ -1,2 +1,3 @@
-# colorust
-Coloring terminal output
+# coloring
+
+Coloring terminal output.
